@@ -1,5 +1,6 @@
 #--> Standard module & library
 import json
+import os  # पोर्ट पहचानने के लिए इसे जोड़ा गया है
 
 #--> Flask
 from flask import Flask, Response, request
@@ -112,9 +113,9 @@ def getLink() -> Response:
     except: result = {'status':'failed', 'message':'wrong payload'}
     return Response(response=json.dumps(obj=result, sort_keys=False), mimetype='application/json')
 
-#--> Initialization
+#--> Initialization (Is hisse ko Render ke liye badla gaya hai)
 if __name__ == '__main__':
-    app.run(debug=True)
-
-# https://1024terabox.com/s/1eBHBOzcEI-VpUGA_xIcGQg
-# https://dm.terabox.com/indonesian/sharing/link?surl=KKG3LQ7jaT733og97CBcGg
+    # Render ke environment se Port uthana, default 10000
+    port = int(os.environ.get("PORT", 10000))
+    # host='0.0.0.0' Render par chalne ke liye zaroori hai
+    app.run(host='0.0.0.0', port=port, debug=False)
