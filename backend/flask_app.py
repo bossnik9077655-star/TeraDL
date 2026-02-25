@@ -112,17 +112,13 @@ def getLink() -> Response:
     except: result = {'status':'failed', 'message':'wrong payload'}
     return Response(response=json.dumps(obj=result, sort_keys=False), mimetype='application/json')
 
+#--> Initialization
 if __name__ == '__main__':
     # Render द्वारा दिया गया पोर्ट प्राप्त करना
     port = int(os.environ.get("PORT", 10000))
     
     # host='0.0.0.0' डालना सबसे ज़रूरी है ताकि 'No open ports' वाला एरर न आए
     app.run(host='0.0.0.0', port=port, debug=False)
-    
-
-#--> Initialization
-if __name__ == '__main__':
-    app.run(debug=True)
 
 # https://1024terabox.com/s/1eBHBOzcEI-VpUGA_xIcGQg
 # https://dm.terabox.com/indonesian/sharing/link?surl=KKG3LQ7jaT733og97CBcGg
