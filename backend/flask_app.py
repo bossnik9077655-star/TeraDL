@@ -1,6 +1,6 @@
 #--> Standard module & library
 import json
-
+import os
 #--> Flask
 from flask import Flask, Response, request
 from flask_cors import CORS
@@ -111,6 +111,14 @@ def getLink() -> Response:
         result = TL.result
     except: result = {'status':'failed', 'message':'wrong payload'}
     return Response(response=json.dumps(obj=result, sort_keys=False), mimetype='application/json')
+
+if __name__ == '__main__':
+    # Render द्वारा दिया गया पोर्ट प्राप्त करना
+    port = int(os.environ.get("PORT", 10000))
+    
+    # host='0.0.0.0' डालना सबसे ज़रूरी है ताकि 'No open ports' वाला एरर न आए
+    app.run(host='0.0.0.0', port=port, debug=False)
+    
 
 #--> Initialization
 if __name__ == '__main__':
